@@ -79,4 +79,34 @@ public class TestUtils {
         return txt;
     }
 
+    /**
+     * Returns the {@link Class<?>} with the given name in the given package. It fails if the class does not exist.
+     * @param className
+     * @param packageName
+     * @return the {@link Class<?>} with the given name in the given package, or fails the test if the class does not exist
+     */
+    static Class<?> getClassForName(String className, String packageName) {
+        try {
+            return Class.forName(packageName + "." + className);
+        } catch (ClassNotFoundException e) {
+            fail(String.format("Class '%s' does not exist in the package '%s'", className, packageName));
+        }
+        return null;
+    }
+
+    /**
+     * Returns the enum value with the given name. It fails if the enum does not contain the value.
+     * @param enumClazz
+     * @param name
+     * @return the enum value with the given name, or fails the test if the enum does not contain the value
+     */
+    static Object getEnumValue(Class<?> enumClazz, String name) {
+        try {
+            return enumClazz.getDeclaredField(name).get(null);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            fail(String.format("Enum '%s' does not contain the value '%s'", enumClazz.getSimpleName(), name));
+        }
+        return null;
+    }
+
 }
