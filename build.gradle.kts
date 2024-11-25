@@ -3,14 +3,14 @@ plugins {
 }
 
 group = "de.phl.programmingproject"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation(platform("org.junit:junit-bom:5.11.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.beanshell:bsh-core:2.0b4")
     testImplementation("org.mockito:mockito-inline:3.12.1")
