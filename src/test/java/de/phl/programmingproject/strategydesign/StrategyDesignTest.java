@@ -3,6 +3,10 @@ package de.phl.programmingproject.strategydesign;
 import de.phl.programmingproject.TestBase;
 import de.phl.programmingproject.TestUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.invocation.Invocation;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -15,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test class for the Strategy Design Pattern exercise.
  */
+@ExtendWith(MockitoExtension.class)
 public class StrategyDesignTest extends TestBase {
     /**
      * In this exercise, we will practice implementing the Strategy Design Pattern in Java. We will use a simple example of a game where a player can choose between different weapons to attack an enemy. The player can switch between weapons at runtime, and each weapon has a different attack strategy.
@@ -154,16 +159,32 @@ public class StrategyDesignTest extends TestBase {
         TestUtils.assertClassHasMethod(playerClass, "attack", void.class, enemyClass);
 
         Object player = playerClass.getConstructor(getAttackStrategyInterface()).newInstance(TestUtils.createInstance(getClass("SwordAttackStrategy")));
-        Object enemy = TestUtils.createInstance(enemyClass);
-        String output = TestUtils.runActionAndGetSystemOut(() -> {
-            try {
-                TestUtils.invokeMethod(player, "attack", enemy);
-            } catch (Exception e) {
-                System.err.println(e);
-                fail("Failed to invoke attack");
-            }
-        });
-        assertTrue(output.contains("damage"), "The 'takeDamage' method of the 'Enemy' class does not print the correct attack value to the console.");
+        Object enemy = Mockito.mock(enemyClass);
+        TestUtils.invokeMethod(player, "attack", enemy);
+
+
+        boolean takeDamage = Mockito.mockingDetails(enemy)
+                .getInvocations()
+                .stream()
+                .anyMatch(inv -> "takeDamage".equals(inv.getMethod().getName())
+                        && inv.getArguments() != null
+                        && inv.getArguments().length == 1
+                        && inv.getArguments()[0] instanceof Integer);
+
+        if(!takeDamage) {
+            fail("The 'attack' method of the 'Player' class does not call the 'takeDamage' method of the 'Enemy' class with an integer argument.");
+        }
+    }
+
+    /** Helper that checks Mockito recorded an invocation named "attack" with the expected single argument. */
+    private boolean verifyAttackInvocation(Object attackerMock, Object expectedArg) {
+        return Mockito.mockingDetails(attackerMock)
+                .getInvocations()
+                .stream()
+                .anyMatch(inv -> "attack".equals(inv.getMethod().getName())
+                        && inv.getArguments() != null
+                        && inv.getArguments().length == 1
+                        && inv.getArguments()[0] == expectedArg);
     }
 
     @Test

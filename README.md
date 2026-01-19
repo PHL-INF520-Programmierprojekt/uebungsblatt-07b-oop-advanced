@@ -3,7 +3,7 @@
 
 In diesem Übungsblatt lernen Sie, objektorientierten Quellcode zur Lösung verschiedener Aufgaben zu entwickeln.
 
-## Übung: Vererbung (`Vehicles` - Fahrzeuge)
+## Übung 1: Vererbung (`Vehicles` - Fahrzeuge)
 
 ### Aufgaben
 
@@ -40,7 +40,7 @@ Implementieren Sie die Klassen im Paket `de.phl.programmingproject.vehicles`.
 
 5. Implementieren Sie die `main` Operation in der Klasse `Main`, um Instanzen jedes Fahrzeugs zu erstellen und deren Kilometerstand und Kraftstoffart auszugeben. Sie können auch andere Attribute zusätzlich ausgeben.
 
-## Übung: Generics und Collections (`ShoppingCart` - Einkaufswagen)
+## Übung 2: Generics und Collections (`ShoppingCart` - Einkaufswagen)
 
 In dieser Übung üben Sie die Verwendung von Generics und Collections in Java, indem Sie einen Einkaufswagen für einen Online-Shop implementieren.
 Implementieren Sie die Klassen im Paket `de.phl.programmingproject.shoppingcart`.
@@ -66,7 +66,7 @@ Um Ihre Implementierung zu testen, implementieren Sie die `main` Operation, soda
 7. Wiederholt zusätzlich Aufgaben 1 bis 6 mit einer neuen `ShoppingCart`-Instanz und einem anderen Typ, der nicht `String` ist.
 
 
-## Übung: Implementierung des Strategy Design Pattern in Java
+## Übung 3: Implementierung des Strategy Design Pattern in Java
 
 In dieser Übung üben wir die Implementierung des Strategy Design Pattern in Java. Wir verwenden ein einfaches Beispiel eines Spiels, in dem ein&ast;e Spieler&ast;in zwischen verschiedenen Waffen wählen kann, um einen Feind anzugreifen. Der/die Spieler&ast;in kann zur Laufzeit zwischen den Waffen wechseln, und jede Waffe hat eine andere Angriffsstrategie.
 Um diese Übung zu lösen, erstellen Sie ein neues Paket `de.phl.programmingproject.strategydesign` und implementieren Sie die Klassen darin.
@@ -82,7 +82,7 @@ Um diese Übung zu lösen, erstellen Sie ein neues Paket `de.phl.programmingproj
 6. Ändern Sie die Angriffsstrategie des `Player`-Objekts auf eine `AxeAttackStrategy`. Rufen Sie die Operation `attack()` erneut auf und überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
 7. Ändern Sie die Angriffsstrategie des `Player`-Objekts auf eine `BowAttackStrategy`. Rufen Sie die Operation `attack()` erneut auf und überprüfen Sie, ob die richtige Angriffsstrategie verwendet wird.
 8. Erstellen Sie eine neue Klasse namens `Enemy` mit einer public Operation namens `takeDamage(int damage)`. Diese Operation sollte einfach eine Nachricht auf der Konsole ausgeben, die anzeigt, dass der Feind den angegebenen Schaden genommen hat.
-9. Ändern Sie die Operation `attack()` der Klasse `Player`, um ein Argument vom Typ `Enemy` zu nehmen. Wenn die Operation `attack()` aufgerufen wird, sollte sie die Operation `takeDamage()` des `Enemy`-Objekts aufrufen und einen zufälligen Wert zwischen 1 und 10 als Schadensmenge übergeben.
+9. Ändern Sie die Operation `attack()` der Klasse `Player`, sodass die Methode ein Argument vom Typ `Enemy` akzeptiert. Wenn die Operation `attack()` aufgerufen wird, sollte sie die Operation `takeDamage()` des `Enemy`-Objekts aufrufen und einen zufälligen Wert zwischen 1 und 10 als Schadensmenge übergeben.
 10. Ändern Sie die `main`-Methode. Erstellen Sie ein `Enemy`-Objekt und übergeben Sie es der Operation `attack()` des `Player`-Objekts. Überprüfen Sie, ob der Feind Schaden nimmt und ob die richtige Angriffsstrategie verwendet wird.
 
 Herzlichen Glückwunsch, Sie haben das Strategy Design Pattern in Java erfolgreich implementiert!
